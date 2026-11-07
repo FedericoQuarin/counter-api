@@ -9,3 +9,4 @@ Esqueleto Spring Boot 4.1.2 (Java 25, Maven wrapper) incorporado y renombrado a 
 
 ## Bitácora
 - 2026-11-07: commit inicial, push a GitHub, rama renombrada a `main`, ruleset de protección y workflow de CI. Se marcaron `mvnw` y los scripts como ejecutables en git para que corran en el runner Linux.
+- 2026-11-07: `AGENTS.md` documenta el flujo de rama por feature + PR hacia `main` (protegida, con check `verify` obligatorio).

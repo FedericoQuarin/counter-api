@@ -12,12 +12,20 @@ API REST en Java con Spring Boot. Este archivo es corto a propósito: el detalle
 ## Empezar cada sesión
 1. Leé `docs/progress.md` y `docs/features.json`.
 2. Corré `bash scripts/init.sh` para chequear el entorno.
-3. Tomá UNA feature con `"passes": false` (la de mayor prioridad), implementala, verificala y cerrala.
+3. Tomá UNA feature con `"passes": false` (la de mayor prioridad), implementala, verificala y cerrala siguiendo "Cerrar una feature".
+4. Trabajala en su propia rama creada desde `main` actualizado: `git switch main && git pull && git switch -c feature/<id>-<slug>` (ej.: `feature/F001-health`).
+
+## Cerrar una feature (en este orden)
+`main` está protegida en GitHub: no acepta push directo ni force push, y solo se mergea por PR con el check `verify` del CI en verde (`.github/workflows/ci.yml`, corre `scripts/verify.sh`).
+1. **Preparar la rama:** con `bash scripts/verify.sh` en verde, marcá la feature `"passes": true`, actualizá `docs/progress.md` (qué hiciste, qué sigue, problemas abiertos) y hacé un commit chico con mensaje claro.
+2. **Crear PR:** `git push -u origin <rama>` y `gh pr create --base main`.
+3. **Esperar a que pase el CI:** `gh pr checks <número> --watch`. Si falla, corregí en la misma rama, pusheá y volvé a esperar. Nunca intentes saltear la protección.
+4. **Mergear PR:** `gh pr merge <número> --squash --delete-branch`.
+5. **Finalizar tarea:** `git switch main && git pull`. La feature recién está cerrada cuando su PR está mergeado en `main`.
 
 ## Reglas
-- Una feature por sesión. No empieces otra hasta cerrar la actual.
+- Una feature por sesión. No empieces otra hasta cerrar la actual (paso 5 de "Cerrar una feature").
 - Una feature solo pasa a `"passes": true` si `bash scripts/verify.sh` termina bien. No la marques por inspección visual.
-- Al terminar: commit chico con mensaje claro y actualizá `docs/progress.md` (qué hiciste, qué sigue, problemas abiertos).
 - No cambies `docs/spec.md` sin avisar; si la spec es ambigua, preguntá.
 - No leas ni escribas `.env` ni `secrets/`.
 
