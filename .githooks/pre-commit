@@ -1,0 +1,8 @@
+#!/bin/sh
+# Hook pre-commit: tests + Checkstyle + PMD + SpotBugs deben pasar (todo corre vía scripts/verify.sh).
+cd "$(git rev-parse --show-toplevel)" || exit 1
+echo "[pre-commit] Ejecutando scripts/verify.sh (tests, Checkstyle, PMD, SpotBugs)..."
+if ! bash scripts/verify.sh; then
+  echo "[pre-commit] La verificación falló: commit rechazado. Corregí los errores y reintentá." >&2
+  exit 1
+fi

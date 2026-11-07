@@ -1,0 +1,8 @@
+{
+  "reglas": "Solo cambiar el campo passes a true cuando scripts/verify.sh termine bien. No borrar ni reordenar features.",
+  "features": [
+    { "id": "F001", "descripcion": "Endpoint GET /health devolviendo estado OK, con test", "passes": false },
+    { "id": "F002", "descripcion": "Manejo global de errores con @RestControllerAdvice (formato JSON uniforme), con test", "passes": false },
+    { "id": "F003", "descripcion": "Derivar de docs/spec.md las features de dominio y agregarlas a esta lista", "passes": false }
+  ]
+}
